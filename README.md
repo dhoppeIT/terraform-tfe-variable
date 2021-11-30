@@ -12,7 +12,6 @@ Terraform module to manage the Terraform Cloud/Enterprise resource
 Copy and paste into your Terraform configuration, insert the variables and run ```terraform init```:
 
 ```hcl
-module "tfe-variable" {
 module "tfe-organization" {
   source = "dhoppeIT/organization/tfe"
 
