@@ -1,23 +1,84 @@
-# FIXME
+# terraform-tfe-variable
 
-Terraform module to manage the FIXME resource.
+Terraform module to manage the Terraform Cloud/Enterprise resource
+(tfe_variable).
 
 ## Graph
 
-![Graph](https://github.com/dhoppeIT/FIXME/blob/main/rover.png)
+![Graph](https://github.com/dhoppeIT/terraform-tfe-variable/blob/main/rover.png)
 
 ## Usage
 
 Copy and paste into your Terraform configuration, insert the variables and run ```terraform init```:
 
 ```hcl
-module "FIXME" {
-  source = "dhoppeIT/FIXME/tfe"
-  ...
+module "tfe-variable" {
+module "tfe-organization" {
+  source = "dhoppeIT/organization/tfe"
+
+  name  = "dhoppeIT"
+  email = "terraform@dhoppe.it"
+}
+
+module "tfe-workspace" {
+  source = "dhoppeIT/workspace/tfe"
+
+  name         = "terraform"
+  organization = module.tfe-organization.name
+}
+
+module "tfe-variable" {
+  source = "dhoppeIT/variable/tfe"
+
+  key          = "TFE_TOKEN"
+  value        = module.tfe-oauth_client.oauth_token_id
+  category     = "env"
+  description  = "The token used to authenticate with Terraform Cloud/Enterprise"
+  sensitive    = true
+  workspace_id = module.tfe-workspace.id
 }
 ```
 
 <!--- BEGIN_TF_DOCS --->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) | >= 0.26.1, < 1.0.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | >= 0.26.1, < 1.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [tfe_variable.default](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_category"></a> [category](#input\_category) | Whether this is a Terraform or environment variable | `string` | `null` | no |
+| <a name="input_description"></a> [description](#input\_description) | Description of the variable | `string` | `null` | no |
+| <a name="input_hcl"></a> [hcl](#input\_hcl) | Whether to evaluate the value of the variable as a string of HCL code | `bool` | `false` | no |
+| <a name="input_key"></a> [key](#input\_key) | Name of the variable | `string` | `null` | no |
+| <a name="input_sensitive"></a> [sensitive](#input\_sensitive) | Whether the value is sensitive | `bool` | `false` | no |
+| <a name="input_value"></a> [value](#input\_value) | Value of the variable | `string` | `null` | no |
+| <a name="input_workspace_id"></a> [workspace\_id](#input\_workspace\_id) | ID of the workspace that owns the variable | `string` | `null` | no |
+
+## Outputs
+
+No outputs.
+
 <!--- END_TF_DOCS --->
 
 ## Authors
@@ -26,4 +87,4 @@ Created and maintained by [Dennis Hoppe](https://github.com/dhoppeIT/).
 
 ## License
 
-Apache 2 licensed. See [LICENSE](https://github.com/dhoppeIT/FIXME/blob/main/LICENSE) for full details.
+Apache 2 licensed. See [LICENSE](https://github.com/dhoppeIT/terraform-tfe-variable/blob/main/LICENSE) for full details.
