@@ -66,13 +66,13 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_category"></a> [category](#input\_category) | Whether this is a Terraform or environment variable | `string` | `null` | no |
+| <a name="input_category"></a> [category](#input\_category) | Whether this is a Terraform or environment variable | `string` | n/a | yes |
 | <a name="input_description"></a> [description](#input\_description) | Description of the variable | `string` | `null` | no |
 | <a name="input_hcl"></a> [hcl](#input\_hcl) | Whether to evaluate the value of the variable as a string of HCL code | `bool` | `false` | no |
-| <a name="input_key"></a> [key](#input\_key) | Name of the variable | `string` | `null` | no |
+| <a name="input_key"></a> [key](#input\_key) | Name of the variable | `string` | n/a | yes |
 | <a name="input_sensitive"></a> [sensitive](#input\_sensitive) | Whether the value is sensitive | `bool` | `false` | no |
-| <a name="input_value"></a> [value](#input\_value) | Value of the variable | `string` | `null` | no |
-| <a name="input_workspace_id"></a> [workspace\_id](#input\_workspace\_id) | ID of the workspace that owns the variable | `string` | `null` | no |
+| <a name="input_value"></a> [value](#input\_value) | Value of the variable | `string` | n/a | yes |
+| <a name="input_workspace_id"></a> [workspace\_id](#input\_workspace\_id) | ID of the workspace that owns the variable | `string` | n/a | yes |
 
 ## Outputs
 
