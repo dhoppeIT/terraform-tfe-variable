@@ -1,18 +1,15 @@
 variable "key" {
   type        = string
-  default     = null
   description = "Name of the variable"
 }
 
 variable "value" {
   type        = string
-  default     = null
   description = "Value of the variable"
 }
 
 variable "category" {
   type        = string
-  default     = null
   description = "Whether this is a Terraform or environment variable"
 }
 
@@ -36,6 +33,5 @@ variable "sensitive" {
 
 variable "workspace_id" {
   type        = string
-  default     = null
   description = "ID of the workspace that owns the variable"
 }
