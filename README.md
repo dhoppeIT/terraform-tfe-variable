@@ -11,6 +11,8 @@ Terraform module to manage the Terraform Cloud/Enterprise resource
 
 Copy and paste into your Terraform configuration, insert the variables and run ```terraform init```:
 
+**Manage single variable:**
+
 ```hcl
 module "tfe-organization" {
   source = "dhoppeIT/organization/tfe"
@@ -35,6 +37,55 @@ module "tfe-variable" {
   description  = "The token used to authenticate with Terraform Cloud/Enterprise"
   sensitive    = true
   workspace_id = module.tfe-workspace.id
+}
+```
+
+**Manage multiple variables:**
+
+```hcl
+locals {
+  variables_terraform = {
+    "AWS_ACCESS_KEY_ID" = {
+      value       = var.access_key
+      category    = "env"
+      description = "The AWS access key to authenticate with Amazon Web Services"
+      sensitive   = true
+    },
+    "AWS_SECRET_ACCESS_KEY" = {
+      value       = var.secret_key
+      category    = "env"
+      description = "The AWS secret key to authenticate with Amazon Web Services"
+      sensitive   = true
+    }
+  }
+}
+
+module "tfe-organization" {
+  source = "dhoppeIT/organization/tfe"
+
+  name  = "dhoppeIT"
+  email = "terraform@dhoppe.it"
+}
+
+module "tfe-workspace" {
+  source = "dhoppeIT/workspace/tfe"
+
+  name         = "terraform"
+  organization = module.tfe-organization.name
+}
+
+module "tfe-variable" {
+  source = "dhoppeIT/variable/tfe"
+
+  for_each = local.variables_terraform
+
+  key                = each.key
+  value              = each.value["value"]
+  category           = each.value["category"]
+  description        = each.value["description"]
+  description_suffix = "(managed by Terraform)"
+  sensitive          = each.value["sensitive"]
+  workspace_id       = module.tfe-workspace_terraform.id
 }
 ```
 
@@ -68,6 +119,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_category"></a> [category](#input\_category) | Whether this is a Terraform or environment variable | `string` | n/a | yes |
 | <a name="input_description"></a> [description](#input\_description) | Description of the variable | `string` | `null` | no |
+| <a name="input_description_suffix"></a> [description\_suffix](#input\_description\_suffix) | Wheter to add a suffix to the description of the variable | `string` | `""` | no |
 | <a name="input_hcl"></a> [hcl](#input\_hcl) | Whether to evaluate the value of the variable as a string of HCL code | `bool` | `false` | no |
 | <a name="input_key"></a> [key](#input\_key) | Name of the variable | `string` | n/a | yes |
 | <a name="input_sensitive"></a> [sensitive](#input\_sensitive) | Whether the value is sensitive | `bool` | `false` | no |
