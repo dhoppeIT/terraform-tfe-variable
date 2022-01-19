@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/dhoppeIT/terraform-tfe-variable/compare/v0.1.0...v0.2.0) (2022-01-19)
+
+
+### Features
+
+* Add argument to add suffix to variable descriptions ([#13](https://github.com/dhoppeIT/terraform-tfe-variable/issues/13)) ([2ab9e77](https://github.com/dhoppeIT/terraform-tfe-variable/commit/2ab9e770bd695cfb99f8f2a45402de39d3e1ca75))
+
 ## 0.1.0 (2021-11-30)
 
 
