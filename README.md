@@ -119,6 +119,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_category"></a> [category](#input\_category) | Whether this is a Terraform or environment variable | `string` | n/a | yes |
 | <a name="input_description"></a> [description](#input\_description) | Description of the variable | `string` | `null` | no |
+| <a name="input_description_suffix"></a> [description\_suffix](#input\_description\_suffix) | Wheter to add a suffix to the description of the variable | `string` | `""` | no |
 | <a name="input_hcl"></a> [hcl](#input\_hcl) | Whether to evaluate the value of the variable as a string of HCL code | `bool` | `false` | no |
 | <a name="input_key"></a> [key](#input\_key) | Name of the variable | `string` | n/a | yes |
 | <a name="input_sensitive"></a> [sensitive](#input\_sensitive) | Whether the value is sensitive | `bool` | `false` | no |
