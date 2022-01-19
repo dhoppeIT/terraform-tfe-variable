@@ -11,6 +11,8 @@ Terraform module to manage the Terraform Cloud/Enterprise resource
 
 Copy and paste into your Terraform configuration, insert the variables and run ```terraform init```:
 
+**Manage single variable:**
+
 ```hcl
 module "tfe-organization" {
   source = "dhoppeIT/organization/tfe"
@@ -35,6 +37,55 @@ module "tfe-variable" {
   description  = "The token used to authenticate with Terraform Cloud/Enterprise"
   sensitive    = true
   workspace_id = module.tfe-workspace.id
+}
+```
+
+**Manage multiple variables:**
+
+```hcl
+locals {
+  variables_terraform = {
+    "AWS_ACCESS_KEY_ID" = {
+      value       = var.access_key
+      category    = "env"
+      description = "The AWS access key to authenticate with Amazon Web Services"
+      sensitive   = true
+    },
+    "AWS_SECRET_ACCESS_KEY" = {
+      value       = var.secret_key
+      category    = "env"
+      description = "The AWS secret key to authenticate with Amazon Web Services"
+      sensitive   = true
+    }
+  }
+}
+
+module "tfe-organization" {
+  source = "dhoppeIT/organization/tfe"
+
+  name  = "dhoppeIT"
+  email = "terraform@dhoppe.it"
+}
+
+module "tfe-workspace" {
+  source = "dhoppeIT/workspace/tfe"
+
+  name         = "terraform"
+  organization = module.tfe-organization.name
+}
+
+module "tfe-variable" {
+  source = "dhoppeIT/variable/tfe"
+
+  for_each = local.variables_terraform
+
+  key                = each.key
+  value              = each.value["value"]
+  category           = each.value["category"]
+  description        = each.value["description"]
+  description_suffix = "(managed by Terraform)"
+  sensitive          = each.value["sensitive"]
+  workspace_id       = module.tfe-workspace_terraform.id
 }
 ```
 

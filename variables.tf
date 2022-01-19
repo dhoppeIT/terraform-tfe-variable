@@ -19,6 +19,12 @@ variable "description" {
   description = "Description of the variable"
 }
 
+variable "description_suffix" {
+  type        = string
+  default     = ""
+  description = "Wheter to add a suffix to the description of the variable"
+}
+
 variable "hcl" {
   type        = bool
   default     = false
