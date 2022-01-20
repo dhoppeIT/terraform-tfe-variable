@@ -49,7 +49,7 @@ locals {
       value       = var.access_key
       category    = "env"
       description = "The AWS access key to authenticate with Amazon Web Services"
-      sensitive   = true
+      sensitive   = false
     },
     "AWS_SECRET_ACCESS_KEY" = {
       value       = var.secret_key
