@@ -14,29 +14,29 @@ Copy and paste into your Terraform configuration, insert the variables and run `
 **Manage single variable:**
 
 ```hcl
-module "tfe-organization" {
+module "tfe_organization" {
   source = "dhoppeIT/organization/tfe"
 
   name  = "dhoppeIT"
   email = "terraform@dhoppe.it"
 }
 
-module "tfe-workspace" {
+module "tfe_workspace" {
   source = "dhoppeIT/workspace/tfe"
 
   name         = "terraform"
-  organization = module.tfe-organization.name
+  organization = module.tfe_organization.name
 }
 
-module "tfe-variable" {
+module "tfe_variable" {
   source = "dhoppeIT/variable/tfe"
 
   key          = "TFE_TOKEN"
-  value        = module.tfe-oauth_client.oauth_token_id
+  value        = module.tfe_oauth_client.oauth_token_id
   category     = "env"
   description  = "The token used to authenticate with Terraform Cloud/Enterprise"
   sensitive    = true
-  workspace_id = module.tfe-workspace.id
+  workspace_id = module.tfe_workspace.id
 }
 ```
 
@@ -60,21 +60,21 @@ locals {
   }
 }
 
-module "tfe-organization" {
+module "tfe_organization" {
   source = "dhoppeIT/organization/tfe"
 
   name  = "dhoppeIT"
   email = "terraform@dhoppe.it"
 }
 
-module "tfe-workspace" {
+module "tfe_workspace" {
   source = "dhoppeIT/workspace/tfe"
 
   name         = "terraform"
-  organization = module.tfe-organization.name
+  organization = module.tfe_organization.name
 }
 
-module "tfe-variable" {
+module "tfe_variable" {
   source = "dhoppeIT/variable/tfe"
 
   for_each = local.variables_terraform
@@ -85,7 +85,7 @@ module "tfe-variable" {
   description        = each.value["description"]
   description_suffix = "(managed by Terraform)"
   sensitive          = each.value["sensitive"]
-  workspace_id       = module.tfe-workspace_terraform.id
+  workspace_id       = module.tfe_workspace_terraform.id
 }
 ```
 
