@@ -95,7 +95,7 @@ module "tfe_variable" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) | >= 0.26.1, < 1.0.0 |
+| <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) | ~> 0.26 |
 
 ## Providers
 
