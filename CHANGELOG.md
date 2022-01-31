@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.1](https://github.com/dhoppeIT/terraform-tfe-variable/compare/v0.2.0...v0.2.1) (2022-01-31)
+
+
+### Bug Fixes
+
+* Allow new minor releases ([#22](https://github.com/dhoppeIT/terraform-tfe-variable/issues/22)) ([544404c](https://github.com/dhoppeIT/terraform-tfe-variable/commit/544404c028275112ce58b3f737033bbe2c181d42))
+
 ## [0.2.0](https://github.com/dhoppeIT/terraform-tfe-variable/compare/v0.1.0...v0.2.0) (2022-01-19)
 
 
