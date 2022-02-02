@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/dhoppeIT/terraform-tfe-variable/compare/v0.2.1...v0.3.0) (2022-02-02)
+
+
+### Features
+
+* Add ID of the variable as output ([#25](https://github.com/dhoppeIT/terraform-tfe-variable/issues/25)) ([ac6fd01](https://github.com/dhoppeIT/terraform-tfe-variable/commit/ac6fd0162f2f0da19dd6e0c07c5377c4c5480608))
+
 ### [0.2.1](https://github.com/dhoppeIT/terraform-tfe-variable/compare/v0.2.0...v0.2.1) (2022-01-31)
 
 
