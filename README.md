@@ -1,7 +1,8 @@
 # terraform-tfe-variable
 
-Terraform module to manage the Terraform Cloud/Enterprise resource
-(tfe_variable).
+Terraform module to manage the following Terraform Cloud/Enterprise resource:
+
+* tfe_variable
 
 ## Graph
 
@@ -11,81 +12,43 @@ Terraform module to manage the Terraform Cloud/Enterprise resource
 
 Copy and paste into your Terraform configuration, insert the variables and run ```terraform init```:
 
-**Manage single variable:**
-
 ```hcl
 module "tfe_organization" {
-  source = "dhoppeIT/organization/tfe"
+  source  = "dhoppeIT/organization/tfe"
+  version = "~> 0.3"
 
   name  = "dhoppeIT"
   email = "terraform@dhoppe.it"
 }
 
+module "tfe_team" {
+  source  = "dhoppeIT/team/tfe"
+  version = "~> 0.1"
+
+  name         = "owners"
+  organization = module.tfe_organization.name
+
+  organization_membership_id = module.tfe_organization.id
+}
+
 module "tfe_workspace" {
-  source = "dhoppeIT/workspace/tfe"
+  source  = "dhoppeIT/workspace/tfe"
+  version = "~> 0.2"
 
   name         = "terraform"
   organization = module.tfe_organization.name
 }
 
 module "tfe_variable" {
-  source = "dhoppeIT/variable/tfe"
+  source  = "dhoppeIT/variable/tfe"
+  version = "~> 0.2"
 
   key          = "TFE_TOKEN"
-  value        = module.tfe_oauth_client.oauth_token_id
+  value        = module.tfe_team.token
   category     = "env"
   description  = "The token used to authenticate with Terraform Cloud/Enterprise"
   sensitive    = true
   workspace_id = module.tfe_workspace.id
-}
-```
-
-**Manage multiple variables:**
-
-```hcl
-locals {
-  variables_terraform = {
-    "AWS_ACCESS_KEY_ID" = {
-      value       = var.access_key
-      category    = "env"
-      description = "The AWS access key to authenticate with Amazon Web Services"
-      sensitive   = false
-    },
-    "AWS_SECRET_ACCESS_KEY" = {
-      value       = var.secret_key
-      category    = "env"
-      description = "The AWS secret key to authenticate with Amazon Web Services"
-      sensitive   = true
-    }
-  }
-}
-
-module "tfe_organization" {
-  source = "dhoppeIT/organization/tfe"
-
-  name  = "dhoppeIT"
-  email = "terraform@dhoppe.it"
-}
-
-module "tfe_workspace" {
-  source = "dhoppeIT/workspace/tfe"
-
-  name         = "terraform"
-  organization = module.tfe_organization.name
-}
-
-module "tfe_variable" {
-  source = "dhoppeIT/variable/tfe"
-
-  for_each = local.variables_terraform
-
-  key                = each.key
-  value              = each.value["value"]
-  category           = each.value["category"]
-  description        = each.value["description"]
-  description_suffix = "(managed by Terraform)"
-  sensitive          = each.value["sensitive"]
-  workspace_id       = module.tfe_workspace_terraform.id
 }
 ```
 
@@ -101,7 +64,7 @@ module "tfe_variable" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | 0.27.1 |
+| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | 0.28.0 |
 
 ## Modules
 
@@ -128,7 +91,9 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_id"></a> [id](#output\_id) | The ID of the variable |
 
 <!--- END_TF_DOCS --->
 
