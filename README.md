@@ -64,7 +64,7 @@ module "tfe_variable" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | 0.27.1 |
+| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | 0.28.0 |
 
 ## Modules
 
@@ -91,7 +91,9 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_id"></a> [id](#output\_id) | The ID of the variable |
 
 <!--- END_TF_DOCS --->
 
