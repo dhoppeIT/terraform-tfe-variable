@@ -1,4 +1,4 @@
 output "variable_id" {
-  value       = try(module.tfe_variable.id, null)
+  value       = module.tfe_variable.id
   description = "The ID of the variable"
 }
