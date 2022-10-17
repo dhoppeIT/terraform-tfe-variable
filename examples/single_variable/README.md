@@ -56,7 +56,6 @@ No resources.
 | Name | Description |
 |------|-------------|
 | <a name="output_variable_id"></a> [variable\_id](#output\_variable\_id) | The ID of the variable |
-
 <!-- END_TF_DOCS -->
 
 ## Authors
